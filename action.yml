@@ -128,6 +128,7 @@ runs:
         set -x
         sudo df -h
         sudo mount
+        sudo ls -lRa /mnt
         set +x
         rm -f "${HOME}/.expansion/df_output"
 
