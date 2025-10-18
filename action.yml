@@ -119,18 +119,16 @@ runs:
         df -m --output=avail /mnt > "${HOME}/.expansion/df_output"
         free_space=$(cat "${HOME}/.expansion/df_output" | tail -n 1 | tr -d ' ')
         echo "Initial free space of /mnt: ${free_space}MB"
-        if [ "${free_space}" == "0" ]; then
-          echo "'df -m --output=avail /mnt' output:"
-          cat "${HOME}/.expansion/df_output"
-          echo "==END=="
-          echo "Retrying 'df -m --output=avail /mnt':"
-          df -m --output=avail /mnt
-          echo "==END=="
-          set -x
-          sudo df -h
-          sudo mount
-          set +x
-        fi
+        echo "'df -m --output=avail /mnt' output:"
+        cat "${HOME}/.expansion/df_output"
+        echo "==END=="
+        echo "Retrying 'df -m --output=avail /mnt':"
+        df -m --output=avail /mnt
+        echo "==END=="
+        set -x
+        sudo df -h
+        sudo mount
+        set +x
         rm -f "${HOME}/.expansion/df_output"
 
         loop_dev=$(sudo losetup --find)
